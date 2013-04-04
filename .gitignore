@@ -1,0 +1,4 @@
+*.pyc
+_*.so
+bifl.egg-info
+build
