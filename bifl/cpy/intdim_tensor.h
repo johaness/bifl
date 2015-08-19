@@ -51,7 +51,7 @@ void tensor(CvMat* img,CvMat* T, CvMat* C, int kernel_size, double std)
             float m = CV_MAT_ELEM(*M, float, r, c);
             float t = CV_MAT_ELEM(*T, float, r, c);
             float res = tanh( (atanh_08  / (9*m + mean)) * t );
-            CV_MAT_ELEM(*T, float, r, c) = isnan(res) ? 0 : res;
+            CV_MAT_ELEM(*T, float, r, c) = cvIsNaN(res) ? 0 : res;
         }
     cvPow(T, T, 3);
     // Calculate Coherence
@@ -68,7 +68,7 @@ void tensor(CvMat* img,CvMat* T, CvMat* C, int kernel_size, double std)
     // zero out nans
     for (int r = 0;  r < C->rows; r++)
         for (int c = 0; c < C->cols; c++)
-            if (isnan(CV_MAT_ELEM(*C, float, r, c)))
+            if (cvIsNaN(CV_MAT_ELEM(*C, float, r, c)))
                 CV_MAT_ELEM(*C, float, r, c) = 0;
     // Release Matrices
     cvReleaseMat(&Dx);
